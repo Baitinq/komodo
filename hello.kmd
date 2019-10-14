@@ -1,0 +1,14 @@
+KMD
+00000000: EA000001    ;     B main
+00000004: 48 45 4C 4C ; hello DEFB "HELLO\n",0
+00000008: 4F 0A 00    ; 
+0000000B:             ; 
+0000000C:             ;     ALIGN
+0000000C: E24F0010    ; main ADR R0, hello
+00000010: EF000003    ;     SWI 3
+00000014: EF000002    ;     SWI 2
+00000018:             ; 
+
+Symbol Table: Labels
+: hello                             00000004  Local -- ARM
+: main                              0000000C  Local -- ARM

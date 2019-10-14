@@ -1,0 +1,3 @@
+#! /bin/sh
+FNAME=$(echo $1 | sed s/.s//g)
+aasm -lk $FNAME.kmd $1
