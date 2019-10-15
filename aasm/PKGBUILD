@@ -17,7 +17,7 @@ build() {
   cd "$srcdir/aasm"
   gcc aasm.c -o aasm
   cat << EOS > kmd_compile
-#! /bin/sh
+#!/bin/sh
 FNAME=\$(echo "\$1" | sed s/.s//g)
 aasm -lk "\$FNAME.kmd" "\$1"
 EOS
