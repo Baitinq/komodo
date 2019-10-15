@@ -19,16 +19,31 @@ md5sums=(
 )
 
 prepare() {
+    mkdir -p "$pkgdir/usr/local/kmd"
 	cd "KMD-$pkgver"
 }
 
 build() {
 	cd "KMD-$pkgver"
-	./configure --prefix=/usr --build=i386
+	./configure --prefix=/usr/local/kmd --build=i386
 	make
+
+cat << EOS > kmd_run
+#!/bin/sh
+KMD_DIR=/usr/local/kmd
+CURR_DIR=\$(pwd)
+cd "\$KMD_DIR"
+./kmd -e jimulator
+cd "\$CURR_DIR"
+EOS
 }
 
 package() {
 	cd "KMD-$pkgver"
-	make DESTDIR="$pkgdir/" install
+    install -Dm755 kmd_run "$pkgdir/usr/bin/kmd"
+	make DESTDIR="$pkgdir" install
+    mv "$pkgdir/usr/local/kmd/bin/kmd" "$pkgdir/usr/local/kmd/"
+    mv "$pkgdir/usr/local/kmd/bin/jimulator" "$pkgdir/usr/local/kmd/"
+    mv "$pkgdir/usr/local/kmd/bin/flash" "$pkgdir/usr/local/kmd/"
+    rm -rf "$pkgdir/usr/local/kmd/bin"
 }
