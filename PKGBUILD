@@ -6,7 +6,7 @@ pkgdesc="Komodo Manchester Debugger"
 arch=('i386' 'x86_64')
 url="http://brej.org/kmd/"
 license=('GPL')
-# depends=('gtk>=1.2.0' 'glib>=1.2.0')
+depends=('gtk>=1.2.0' 'glib>=1.2.0')
 makedepends=()
 
 provides=('kmd')
